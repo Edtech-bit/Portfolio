@@ -1,0 +1,160 @@
+.resume-layout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 100px;
+  padding: 5rem 10%;
+  min-height: 85vh;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--bg-color);
+  transition: background-color var(--transition-speed) ease;
+}
+
+/* BACKGROUND TEXT EFFECT */
+.resume-hud-bg {
+  position: absolute;
+  top: 10%;
+  left: 5%;
+  font-family: var(--mono-font);
+  font-size: 8rem;
+  font-weight: 900;
+  color: var(--text-color);
+  opacity: 0.03;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* RESUME PREVIEW CONTAINER */
+.resume-preview {
+  position: relative;
+  z-index: 2;
+  transition: transform 0.5s ease;
+}
+
+.resume-preview:hover {
+  transform: scale(1.02) rotate(-1deg);
+}
+
+.resume-frame {
+  position: relative;
+  padding: 15px;
+  background: rgba(var(--text-color-rgb, 255, 255, 255), 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 20px 50px var(--shadow-color);
+}
+
+.resume-preview-img {
+  width: 450px;
+  display: block;
+  filter: brightness(0.9) contrast(1.1);
+  transition: filter 0.3s ease;
+}
+
+.resume-preview:hover .resume-preview-img {
+  filter: brightness(1) contrast(1);
+}
+
+/* HUD CORNERS */
+.frame-corner {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border: 2px solid var(--accent-color);
+}
+.tl { top: -5px; left: -5px; border-right: none; border-bottom: none; }
+.tr { top: -5px; right: -5px; border-left: none; border-bottom: none; }
+.bl { bottom: -5px; left: -5px; border-right: none; border-top: none; }
+.br { bottom: -5px; right: -5px; border-left: none; border-top: none; }
+
+/* ANIMATED SCAN LINE */
+.resume-scan-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--accent-color);
+  box-shadow: 0 0 15px var(--accent-color);
+  z-index: 5;
+  opacity: 0.5;
+  animation: scan-move 4s infinite linear;
+}
+
+@keyframes scan-move {
+  0% { top: 0; opacity: 0; }
+  50% { opacity: 0.5; }
+  100% { top: 100%; opacity: 0; }
+}
+
+/* ACTIONS AREA */
+.resume-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Changed to start for better reading */
+  z-index: 2;
+}
+
+.file-info {
+  font-family: var(--mono-font);
+  font-size: 0.75rem;
+  margin-bottom: 2rem;
+  line-height: 2;
+}
+
+.file-info .label { color: var(--text-color); opacity: 0.5; }
+.file-info .value { color: var(--text-color); margin-right: 15px; }
+.file-info .green { color: var(--accent-color); font-weight: bold; }
+
+/* DOWNLOAD BUTTON */
+.btn-download-resume {
+  position: relative;
+  background: transparent;
+  border: 1px solid var(--accent-color);
+  color: var(--text-color);
+  padding: 1.2rem 3.5rem;
+  font-family: var(--nav-font);
+  font-size: 1.1rem;
+  font-weight: 800;
+  cursor: pointer;
+  letter-spacing: 2px;
+  overflow: hidden;
+  transition: 0.3s;
+}
+
+.btn-download-resume::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--accent-color);
+  transition: 0.4s cubic-bezier(0.6, 0, 0.4, 1);
+  z-index: -1;
+}
+
+.btn-download-resume:hover {
+  color: #000;
+}
+
+.btn-download-resume:hover::before {
+  left: 0;
+}
+
+.resume-tag {
+  color: var(--accent-color);
+  font-family: var(--mono-font);
+  font-size: 1.2rem;
+  margin-top: 2rem;
+  opacity: 0.6;
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 968px) {
+  .resume-layout { flex-direction: column; gap: 50px; padding-top: 150px; }
+  .resume-preview-img { width: 100%; max-width: 350px; }
+  .resume-actions { align-items: center; text-align: center; }
+  .resume-hud-bg { font-size: 4rem; }
+}

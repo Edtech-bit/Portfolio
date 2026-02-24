@@ -1,0 +1,108 @@
+<section class="about-container">
+  <div class="hud-header-mini">
+    <span class="accent">//</span> PROFILE_DATA
+  </div>
+
+  <div class="about-top">
+    <div class="about-img-box">
+      <div class="corner-tl"></div>
+      <div class="corner-br"></div>
+      <img src="About.jpg" alt="Profile Photo">
+    </div>
+
+    <div class="about-text-content">
+      <h2 class="bio-title">Full-Stack Dev <span class="accent">&</span> Strategist</h2>
+      <p class="bio-text">
+        I'm a passionate web developer with expertise in building modern, responsive web applications. 
+        I love creating clean, efficient code and turning ideas into reality through technology.
+      </p>
+      
+      <div class="skills-grid">
+        <div class="skill-card">
+          <div class="skill-header">
+            <span class="dot"></span>
+            <h4>Frontend</h4>
+          </div>
+          <p>Angular, React, Vue, HTML/CSS</p>
+        </div>
+        <div class="skill-card">
+          <div class="skill-header">
+            <span class="dot"></span>
+            <h4>Backend</h4>
+          </div>
+          <p>Node.js, PHP, MySQL, SQL</p>
+        </div>
+        <div class="skill-card">
+          <div class="skill-header">
+            <span class="dot"></span>
+            <h4>Tools</h4>
+          </div>
+          <p>Git, Docker, VS Code, Figma</p>
+        </div>
+        <div class="skill-card">
+          <div class="skill-header">
+            <span class="dot"></span>
+            <h4>Other</h4>
+          </div>
+          <p>SEO, Digital Marketing, REST API</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="certifications-section">
+    <h3 class="cert-title">Verified_Certificates</h3>
+    <div class="cert-grid">
+      <div class="cert-item" (click)="zoomImage('Content_Marketing.png')">
+        <img src="Content_Marketing.png" alt="Cert 1">
+      </div>
+      <div class="cert-item" (click)="zoomImage('Design_Thinking.png')">
+        <img src="Design_Thinking.png" alt="Cert 2">
+      </div>
+      <div class="cert-item" (click)="zoomImage('Digital_Advertising.png')">
+        <img src="Digital_Advertising.png" alt="Cert 3">
+      </div>
+      <div class="cert-item" (click)="zoomImage('Digital_marketing.png')">
+        <img src="Digital_marketing.png" alt="Cert 4">
+      </div>
+      <div class="cert-item" (click)="zoomImage('SEO_CERTIFICATION.png')">
+        <img src="SEO_CERTIFICATION.png" alt="Cert 5">
+      </div>
+      <div class="cert-item" (click)="zoomImage('UIUX_Designing.png')">
+        <img src="UIUX_Designing.png" alt="Cert 6">
+      </div>
+    </div>
+    
+    <button class="btn-view-more" (click)="toggleModal(true)">
+      REQUEST ACCESS [VIEW ALL]
+    </button>
+  </div>
+
+  <div class="cert-modal" *ngIf="isModalOpen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span><span class="accent">>></span> ACCESS_GRANTED: ALL_CERTIFICATES</span>
+        <button class="close-btn" (click)="toggleModal(false)">[X] CLOSE</button>
+      </div>
+      <div class="modal-body">
+        <img src="Content_Marketing.png" (click)="zoomImage('Content_Marketing.png')" alt="Cert 1">
+        <img src="Design_Thinking.png" (click)="zoomImage('Design_Thinking.png')" alt="Cert 2">
+        <img src="Digital_Advertising.png" (click)="zoomImage('Digital_Advertising.png')" alt="Cert 3">
+        <img src="Digital_marketing.png" (click)="zoomImage('Digital_marketing.png')" alt="Cert 4">
+        <img src="SEO_CERTIFICATION.png" (click)="zoomImage('SEO_CERTIFICATION.png')" alt="Cert 5">
+        <img src="UIUX_Designing.png" (click)="zoomImage('UIUX_Designing.png')" alt="Cert 6">
+      </div>
+    </div>
+  </div>
+
+  <div class="zoom-overlay" *ngIf="zoomedImage" (click)="zoomImage(null)">
+    <div class="zoom-container" (click)="$event.stopPropagation()">
+      <div class="zoom-header">
+        <span class="zoom-label">FILE_VIEWER.EXE</span>
+        <button class="zoom-close" (click)="zoomImage(null)">[X]</button>
+      </div>
+      <img [src]="zoomedImage" class="zoomed-in-img" alt="Zoomed View">
+      <span class="zoom-footer">CLICK_ANYWHERE_TO_RETURN</span>
+    </div>
+  </div>
+</section>

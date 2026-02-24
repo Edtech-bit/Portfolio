@@ -1,0 +1,55 @@
+<section class="neon-stage" 
+         [style.--x.%]="mouseX()" 
+         [style.--y.%]="mouseY()">
+  
+  <div class="mouse-glow"></div>
+
+  <div class="interface-container">
+    
+    <header class="hud-header animate-flicker">
+      <div class="brand">PORTFOLIO</div>
+      <div class="location">LOCATED: ANGELES CITY, PH</div>
+    </header>
+
+    <main class="main-visual">
+      
+      <div class="image-area animate-float">
+        <div class="image-frame">
+          <img src="HomePic.png" alt="Ed Castillo" class="hero-img">
+          <div class="scan-bar"></div>
+          <div class="bottom-blend"></div>
+        </div>
+        <div class="data-tag top-right">TRK_04</div>
+        <div class="data-tag bottom-left">IMG_SRC_88</div>
+      </div>
+
+      <div class="text-area">
+        <div class="overflow-hide">
+          <h1 class="f-name reveal-up">Ed Clarence</h1>
+        </div>
+        <div class="overflow-hide">
+          <h1 class="l-name reveal-up glitch" data-text="Castillo">Castillo</h1>
+        </div>
+
+        <div class="role-line reveal-fade">
+          <div class="neon-line"></div>
+          <p class="role-title">Front-End Developer • UI Engineer</p>
+        </div>
+      </div>
+
+    </main>
+
+    <footer class="hud-footer reveal-fade">
+      <div class="footer-data">
+        <p>SYSTEM_STATUS: <span class="green-text">OPERATIONAL</span></p>
+        <p>AVAILABLE_FOR_WORK: TRUE</p>
+      </div>
+
+      <div class="action-row">
+        <a routerLink="/projects" class="btn-primary">View Work</a>
+        <a routerLink="/contact" class="btn-secondary">Contact</a>
+      </div>
+    </footer>
+
+  </div>
+</section>

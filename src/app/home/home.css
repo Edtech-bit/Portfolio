@@ -1,0 +1,235 @@
+/* ===== BASE & BACKGROUND ===== */
+.neon-stage {
+  background-color: var(--bg-color);
+  height: calc(100vh - 100px);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  transition: background-color var(--transition-speed) ease;
+}
+
+.neon-stage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(var(--accent-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--accent-color) 1px, transparent 1px);
+  background-size: 60px 60px;
+  z-index: 0;
+  opacity: 0.05;
+}
+
+.mouse-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--x) var(--y), var(--accent-color) 0%, transparent 35%);
+  opacity: 0.15;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ===== CONTAINER ===== */
+.interface-container {
+  position: relative;
+  z-index: 10;
+  width: 85%;
+  max-width: 1200px;
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* ===== IMAGE SECTION FIXES ===== */
+.main-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 80px; 
+}
+
+.image-area {
+  position: relative;
+  width: 320px;  
+  height: 420px; 
+  flex-shrink: 0; 
+}
+
+/* Data Corners */
+.image-area::before,
+.image-area::after {
+  content: "";
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--accent-color);
+  opacity: 0.6;
+  z-index: 11;
+}
+.image-area::before { top: -12px; left: -12px; border-right: none; border-bottom: none; }
+.image-area::after { bottom: -12px; right: -12px; border-left: none; border-top: none; }
+
+.image-frame {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  background: #111; 
+  transition: 0.4s ease;
+  border-radius: 4px;
+}
+
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+  object-position: center top; 
+  filter: grayscale(40%) contrast(1.1);
+  transition: 0.5s ease;
+}
+
+.image-frame:hover .hero-img {
+  filter: grayscale(0%) contrast(1.2);
+  transform: scale(1.05); 
+}
+
+/* Scan Bar Animation */
+.scan-bar {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--accent-color);
+  box-shadow: 0 0 15px var(--accent-color);
+  z-index: 10;
+  animation: scan 4s infinite linear;
+}
+
+@keyframes scan {
+  0% { top: 0; opacity: 0; }
+  10%, 90% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+.bottom-blend {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 35%;
+  background: linear-gradient(to top, var(--bg-color), transparent);
+  z-index: 5;
+}
+
+/* ===== TEXT STYLES ===== */
+.f-name, .l-name {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(2.5rem, 6vw, 5.5rem);
+  font-weight: 900;
+  margin: 0;
+  letter-spacing: -3px;
+  line-height: 0.85;
+  color: var(--text-color);
+}
+
+.l-name {
+  color: var(--accent-color);
+  text-shadow: 0 0 20px var(--shadow-color);
+}
+
+.overflow-hide { overflow: hidden; }
+
+/* Entrance Animations */
+.reveal-up {
+  animation: revealUp 1.2s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+  transform: translateY(100%);
+}
+
+@keyframes revealUp {
+  to { transform: translateY(0); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* ===== FOOTER/HEADER ===== */
+.hud-header, .hud-footer {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text-color);
+  opacity: 0.7;
+}
+
+.hud-header { display: flex; justify-content: space-between; font-size: 0.7rem; }
+.hud-footer { display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 20px; }
+
+.green-text { color: var(--accent-color); }
+
+/* ===== BUTTONS (UPDATED) ===== */
+.action-row { 
+  display: flex; 
+  gap: 15px; 
+}
+
+.btn-primary, .btn-secondary {
+  /* Flex centering ensures text is always in the middle */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* Fixed height and min-width for consistent button sizes */
+  height: 50px;
+  min-width: 160px; 
+  padding: 0 30px;
+  
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  box-sizing: border-box; /* Ensures padding doesn't break width */
+}
+
+.btn-primary { 
+  background: var(--text-color); 
+  color: var(--bg-color); 
+  border: none;
+}
+
+.btn-primary:hover { 
+  background: var(--accent-color); 
+  transform: translateY(-3px); 
+  box-shadow: 0 10px 20px -5px var(--shadow-color);
+}
+
+.btn-secondary { 
+  border: 1px solid var(--border-color); 
+  color: var(--text-color); 
+  background: transparent;
+}
+
+.btn-secondary:hover { 
+  border-color: var(--accent-color); 
+  color: var(--accent-color);
+  background: rgba(var(--accent-color-rgb, 0, 255, 0), 0.05);
+}
+
+/* MOBILE */
+@media (max-width: 900px) {
+  .main-visual { flex-direction: column; text-align: center; }
+  .image-area { width: 260px; height: 340px; }
+  .hud-header, .hud-footer { flex-direction: column; align-items: center; gap: 10px; }
+  .action-row { width: 100%; justify-content: center; }
+  .btn-primary, .btn-secondary { min-width: 140px; }
+}
