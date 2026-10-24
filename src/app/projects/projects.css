@@ -49,7 +49,7 @@
 /* CARD DESIGN */
 .project-card {
   position: relative; /* Essential for the absolute overlay to attach here */
-  background: rgba(var(--text-color-rgb, 255, 255, 255), 0.03);
+  background: var(--card-bg);
   backdrop-filter: blur(5px);
   border: 1px solid var(--border-color);
   border-radius: 12px;
@@ -62,7 +62,7 @@
 .project-card:hover {
   border-color: var(--accent-color);
   transform: translateY(-10px);
-  background: rgba(var(--accent-color-rgb, 57, 255, 20), 0.05);
+  background: rgba(var(--accent-color-rgb), 0.06);
   box-shadow: 0 15px 30px -10px var(--shadow-color);
 }
 
@@ -200,4 +200,22 @@
   .projects-hud-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
   .section-title { font-size: 2rem; }
   .project-img-container { height: 180px; }
+}
+
+/* ===== EXTRA POLISH ===== */
+.project-card.featured { grid-column: 1 / -1; }
+.project-card.featured .project-img-container { height: 320px; }
+.card-links a { pointer-events: auto; }
+.card-links i { font-size: 1.2rem; }
+
+/* Touch screens can't hover, so show pictures in full color */
+@media (hover: none) {
+  .project-img { filter: none; }
+  .project-card:hover { transform: none; }
+}
+
+@media (max-width: 768px) {
+  .projects-grid { grid-template-columns: 1fr; }
+  .project-card.featured .project-img-container { height: 200px; }
+  .card-content { padding: 1.4rem; }
 }

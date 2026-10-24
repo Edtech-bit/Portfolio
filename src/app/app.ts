@@ -1,47 +1,48 @@
-import { Component, Renderer2, Inject, OnInit } from '@angular/core';
-import { DOCUMENT, CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Component, OnInit, Renderer2, inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [RouterLink, RouterLinkActive, RouterOutlet],
   templateUrl: './app.html',
   styleUrls: ['./app.css']
 })
 export class App implements OnInit {
-  isLightMode: boolean = false;
+  private renderer = inject(Renderer2);
+  private document = inject(DOCUMENT);
 
-  constructor(
-    private renderer: Renderer2,
-    @Inject(DOCUMENT) private document: Document
-  ) {}
+  isLightMode = false;
+  readonly year = new Date().getFullYear();
 
   ngOnInit() {
-    // Check if user has a saved preference
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'light') {
-      this.enableLightMode();
+    let saved: string | null = null;
+    try {
+      saved = localStorage.getItem('theme');
+    } catch {
+      // Storage can be blocked. Just use the default theme.
+    }
+    if (saved === 'light') {
+      this.setTheme(true);
     }
   }
 
   toggleTheme() {
-    if (this.isLightMode) {
-      this.disableLightMode();
+    this.setTheme(!this.isLightMode);
+  }
+
+  private setTheme(light: boolean) {
+    this.isLightMode = light;
+    if (light) {
+      this.renderer.addClass(this.document.body, 'light-mode');
     } else {
-      this.enableLightMode();
+      this.renderer.removeClass(this.document.body, 'light-mode');
     }
-  }
-
-  private enableLightMode() {
-    this.isLightMode = true;
-    this.renderer.addClass(this.document.body, 'light-mode');
-    localStorage.setItem('theme', 'light');
-  }
-
-  private disableLightMode() {
-    this.isLightMode = false;
-    this.renderer.removeClass(this.document.body, 'light-mode');
-    localStorage.setItem('theme', 'dark');
+    try {
+      localStorage.setItem('theme', light ? 'light' : 'dark');
+    } catch {
+      // ignore
+    }
   }
 }

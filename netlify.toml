@@ -1,0 +1,15 @@
+[build]
+  # This is the command to build your Angular app
+  command = "npm run build"
+  
+  # This MUST point to the folder where index.html lives after building
+  # Replace 'my-portfolio' with your actual project name from angular.json
+  publish = "dist/my-portfolio/browser"
+
+[functions]
+  directory = "netlify/functions"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

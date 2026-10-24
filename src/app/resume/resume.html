@@ -1,31 +1,30 @@
 <section class="resume-layout">
-  <div class="resume-hud-bg">RESUME_VIEWER_V2.0</div>
-  
+  <div class="resume-hud-bg" aria-hidden="true">RESUME_VIEWER_V2.0</div>
+
   <div class="resume-preview">
-    <div class="resume-scan-line"></div>
-    
     <div class="resume-frame">
+      <div class="resume-scan-line"></div>
       <div class="frame-corner tl"></div>
       <div class="frame-corner tr"></div>
       <div class="frame-corner bl"></div>
       <div class="frame-corner br"></div>
-      <img src="Resume.png" alt="Resume Preview" class="resume-preview-img">
+      <img src="Resume.png" alt="Preview of Ed Castillo's resume" class="resume-preview-img">
     </div>
   </div>
-  
+
   <div class="resume-actions">
     <div class="file-info">
-      <span class="label">FILE_NAME:</span> <span class="value">CASTILLO_CV_2026.PDF</span>
+      <span class="label">FILE_NAME:</span> <span class="value">CASTILLO_CV_2026.PNG</span><br>
       <span class="label">STATUS:</span> <span class="value green">READY_FOR_EXPORT</span>
     </div>
-    
-    <a href="assets/CASTILLO_CV_2026.pdf" download="CASTILLO_CV_2026.pdf" class="download-link-wrapper">
-      <button class="btn-download-resume">
-        <span class="btn-text">DOWNLOAD_CV</span>
-        <span class="btn-icon">↓</span>
-      </button>
+
+    <!-- To offer a PDF instead: put the PDF in the "public" folder and change both
+         file names below, e.g. href="CASTILLO_CV_2026.pdf" download="CASTILLO_CV_2026.pdf" -->
+    <a href="Resume.png" download="CASTILLO_CV_2026.png" class="btn-download-resume">
+      <span class="btn-text">DOWNLOAD_CV</span>
+      <span class="btn-icon" aria-hidden="true">↓</span>
     </a>
-    
+
     <p class="resume-tag">&lt;/resume.sh&gt;</p>
   </div>
 </section>

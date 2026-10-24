@@ -49,6 +49,9 @@
 }
 
 .social-item {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s;
   display: flex;
   align-items: center;
   gap: 20px;
@@ -62,7 +65,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(var(--text-color-rgb, 255,255,255), 0.05);
+  background: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: 8px;
   color: var(--accent-color);
@@ -71,24 +74,16 @@
 
 .social-item:hover .icon-box {
   background: var(--accent-color);
-  color: #000;
+  color: var(--on-accent);
   transform: scale(1.1) rotate(5deg);
 }
 
-.social-item a {
-  color: inherit;
-  text-decoration: none;
-  transition: color 0.3s;
-}
-
-.social-item a:hover {
-  color: var(--accent-color);
-}
+.social-item:hover { color: var(--accent-color); }
 
 /* FORM CONTAINER */
 .contact-form-container {
   flex: 1;
-  background: rgba(var(--text-color-rgb, 255,255,255), 0.02);
+  background: var(--card-bg);
   backdrop-filter: blur(10px);
   padding: 3rem;
   border-radius: 12px;
@@ -144,7 +139,7 @@
 .form-group input, 
 .form-group textarea {
   width: 100%;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(125, 125, 125, 0.08);
   border: 1px solid var(--border-color);
   padding: 1rem;
   color: var(--text-color);
@@ -165,8 +160,9 @@
 .btn-send {
   width: 100%;
   background: var(--accent-color);
-  color: #000;
+  color: var(--on-accent);
   border: none;
+  border-radius: 4px;
   padding: 1.2rem;
   font-weight: 800;
   font-family: var(--mono-font);
@@ -183,7 +179,30 @@
 
 /* RESPONSIVE */
 @media (max-width: 968px) {
-  .contact-wrapper { flex-direction: column; gap: 4rem; padding: 120px 5% 5rem; }
+  .contact-wrapper { flex-direction: column; gap: 4rem; padding: 2rem 5% 5rem; }
   .contact-info h2 { font-size: 3rem; }
   .contact-form-container { padding: 2rem; }
 }
+
+/* ===== EXTRA POLISH ===== */
+.form-group input::placeholder,
+.form-group textarea::placeholder { color: var(--text-color); opacity: 0.35; }
+
+.form-group textarea { resize: vertical; min-height: 120px; }
+
+.btn-send:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.form-success {
+  margin: 1.4rem 0 0;
+  font-family: var(--mono-font);
+  font-size: 0.8rem;
+  color: var(--accent-color);
+  line-height: 1.6;
+}
+
+.social-item span:last-child { overflow-wrap: anywhere; }

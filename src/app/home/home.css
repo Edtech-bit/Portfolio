@@ -1,12 +1,13 @@
 /* ===== BASE & BACKGROUND ===== */
 .neon-stage {
   background-color: var(--bg-color);
-  height: calc(100vh - 100px);
+  min-height: calc(100vh - 150px);
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  padding: 24px 0;
   position: relative;
   transition: background-color var(--transition-speed) ease;
 }
@@ -38,10 +39,11 @@
   z-index: 10;
   width: 85%;
   max-width: 1200px;
-  height: 70vh;
+  min-height: 70vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: 40px;
 }
 
 /* ===== IMAGE SECTION FIXES ===== */
@@ -79,7 +81,7 @@
   position: relative;
   overflow: hidden;
   border: 1px solid var(--border-color);
-  background: #111; 
+  background: var(--card-bg);
   transition: 0.4s ease;
   border-radius: 4px;
 }
@@ -202,8 +204,8 @@
 }
 
 .btn-primary { 
-  background: var(--text-color); 
-  color: var(--bg-color); 
+ background: var(--text-color);
+  color: var(--bg-color);
   border: none;
 }
 
@@ -222,12 +224,67 @@
 .btn-secondary:hover { 
   border-color: var(--accent-color); 
   color: var(--accent-color);
-  background: rgba(var(--accent-color-rgb, 0, 255, 0), 0.05);
+  background: rgba(var(--accent-color-rgb), 0.08);
+}
+
+/* ===== THINGS THE HTML USES THAT HAD NO STYLES YET ===== */
+.text-area { min-width: 0; }
+
+.role-line {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.neon-line {
+  width: 60px;
+  height: 2px;
+  background: var(--accent-color);
+  box-shadow: 0 0 12px var(--accent-color);
+  flex-shrink: 0;
+}
+
+.role-title {
+  margin: 0;
+  font-family: var(--mono-font);
+  font-size: clamp(0.8rem, 1.6vw, 1.05rem);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-color);
+  opacity: 0.85;
+}
+
+.data-tag {
+  position: absolute;
+  font-family: var(--mono-font);
+  font-size: 0.65rem;
+  letter-spacing: 2px;
+  color: var(--accent-color);
+  opacity: 0.8;
+  z-index: 12;
+}
+.data-tag.top-right { top: -22px; right: 0; }
+.data-tag.bottom-left { bottom: -22px; left: 0; }
+
+.reveal-fade { opacity: 0; animation: fadeIn 1s ease 0.9s forwards; }
+.animate-flicker { animation: fadeIn 0.8s ease 0.1s both; }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 0.85; } }
+
+/* Touch screens can't hover, so show the photo in full color */
+@media (hover: none) {
+  .hero-img { filter: none; }
+  .image-frame:hover .hero-img { transform: none; }
 }
 
 /* MOBILE */
 @media (max-width: 900px) {
-  .main-visual { flex-direction: column; text-align: center; }
+  .main-visual { flex-direction: column; text-align: center; gap: 40px; }
+  .role-line { justify-content: center; }
+  .neon-line { display: none; }
+  .interface-container { width: 90%; }
+  .f-name, .l-name { letter-spacing: -1px; line-height: 0.95; }
   .image-area { width: 260px; height: 340px; }
   .hud-header, .hud-footer { flex-direction: column; align-items: center; gap: 10px; }
   .action-row { width: 100%; justify-content: center; }

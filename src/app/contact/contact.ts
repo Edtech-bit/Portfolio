@@ -9,8 +9,22 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./contact.css']
 })
 export class Contact {
+  readonly email = 'castilloed7899@gmail.com';
+
+  name = '';
+  senderEmail = '';
+  message = '';
+  sent = false;
+
+  // Opens the visitor's email app with the message filled in.
   onSubmit() {
-    console.log('Form submitted');
-    alert('Thank you for your message, Ed will get back to you soon!');
+    const subject = encodeURIComponent(`Portfolio message from ${this.name}`);
+    const body = encodeURIComponent(`${this.message}\n\nFrom: ${this.name} (${this.senderEmail})`);
+    window.location.href = `mailto:${this.email}?subject=${subject}&body=${body}`;
+
+    this.sent = true;
+    this.name = '';
+    this.senderEmail = '';
+    this.message = '';
   }
 }
