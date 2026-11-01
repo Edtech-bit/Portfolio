@@ -1,26 +1,43 @@
 <section class="projects-page">
   <div class="section-head">
-    <span class="num">{{ pad(projects.length - 1) }}</span>
+    <span class="num">{{ pad(visible().length) }}</span>
     <h2>Selected<br>work</h2>
   </div>
 
-  <div class="project-list">
-    @for (p of projects; track p.title; let i = $index) {
-      <article class="project reveal" [class.flip]="i % 2 === 1" [style.--c]="p.color">
+  <!-- Filter buttons -->
+  <div class="filters" role="group" aria-label="Filter projects">
+    @for (f of filters; track f.key) {
+      @if (countOf(f.key) > 0) {
+        <button type="button" class="filter-btn"
+                [class.active]="active() === f.key"
+                [attr.aria-pressed]="active() === f.key"
+                (click)="setFilter(f.key)">
+          {{ f.label }} <span class="count">{{ countOf(f.key) }}</span>
+        </button>
+      }
+    }
+  </div>
+
+  <div class="project-grid">
+    @for (p of visible(); track p.title; let i = $index) {
+      <article class="project" [style.--c]="p.color">
         @if (p.live) {
           <a class="project-shot" [href]="p.live" target="_blank" rel="noopener" [attr.aria-label]="p.liveLabel + ': ' + p.title">
-            <img [src]="p.image" [alt]="p.alt">
+            <img [src]="p.image" [alt]="p.alt" loading="lazy">
           </a>
         } @else {
           <div class="project-shot">
-            <img [src]="p.image" [alt]="p.alt">
+            <img [src]="p.image" [alt]="p.alt" loading="lazy">
           </div>
         }
 
         <div class="project-info">
-          <span class="project-num">{{ pad(i) }}</span>
-          <h3>{{ p.title }}</h3>
-          <p>{{ p.text }}</p>
+          <div class="project-head">
+            <h3>{{ p.title }}</h3>
+            <span class="project-num">{{ pad(i + 1) }}</span>
+          </div>
+
+          <p class="project-text">{{ p.text }}</p>
           @if (p.note) {
             <p class="project-note">{{ p.note }}</p>
           }
