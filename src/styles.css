@@ -1,42 +1,31 @@
-/* Fonts are loaded in index.html */
-
-/* ===== THEME COLORS (dark is the default) ===== */
+/* ===== COLORS, FONTS, SIZES (change the look of the whole site here) ===== */
 :root {
-  --nav-font: 'Outfit', sans-serif;
-  --mono-font: 'JetBrains Mono', monospace;
+  --display: 'Anton', 'Impact', 'Arial Narrow', sans-serif;
+  --body: 'Space Grotesk', system-ui, sans-serif;
+  --mono: 'Space Mono', ui-monospace, monospace;
 
-  --bg-color: #05070a;
-  --text-color: #f4f6f8;
-  --text-color-rgb: 244, 246, 248;
-  --link-color: #a3abb5;
-  --link-hover-color: #ffffff;
-  --accent-color: #39ff14;
-  --accent-color-rgb: 57, 255, 20;
-  --on-accent: #02130a;          /* text that sits ON the accent color */
-  --active-link-color: var(--accent-color);
-  --footer-color: #6b7480;
-  --theme-bg-hover: rgba(var(--accent-color-rgb), 0.12);
-  --shadow-color: rgba(var(--accent-color-rgb), 0.35);
-  --border-color: rgba(255, 255, 255, 0.14);
-  --glass-bg: rgba(12, 14, 18, 0.78);
-  --card-bg: rgba(255, 255, 255, 0.035);
-  --transition-speed: 0.4s;
+  --bg: #f4f0e6;
+  --ink: #0b0b0b;       /* main text and all borders */
+  --paper: #ffffff;
+  --muted: #4a463e;
+
+  --yellow: #ffe14d;
+  --pink: #ff6fa5;
+  --blue: #5b7cff;
+  --green: #3ddc97;
+  --orange: #ff8a3d;
+  --on-color: #0b0b0b;  /* text that sits on a colored block (always dark) */
+
+  --line: 3px;
+  --shadow: 6px 6px 0 var(--ink);
+  --nav-h: 68px;
 }
 
-body.light-mode {
-  --bg-color: #f4f6f9;
-  --text-color: #0d1117;
-  --text-color-rgb: 13, 17, 23;
-  --link-color: #566070;
-  --link-hover-color: #000000;
-  --accent-color: #0057ff;
-  --accent-color-rgb: 0, 87, 255;
-  --on-accent: #ffffff;
-  --footer-color: #4a5260;
-  --shadow-color: rgba(var(--accent-color-rgb), 0.22);
-  --border-color: rgba(0, 0, 0, 0.13);
-  --glass-bg: rgba(255, 255, 255, 0.85);
-  --card-bg: rgba(0, 0, 0, 0.03);
+body.dark-mode {
+  --bg: #0d0d0d;
+  --ink: #f4f0e6;
+  --paper: #1a1a1a;
+  --muted: #b9b4a8;
 }
 
 * { box-sizing: border-box; }
@@ -44,24 +33,94 @@ html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  padding: 0;
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  font-family: var(--nav-font);
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  overflow-x: clip;
   -webkit-font-smoothing: antialiased;
-  background-image:
-    radial-gradient(at 0% 0%, rgba(var(--accent-color-rgb), 0.07) 0px, transparent 50%),
-    radial-gradient(at 100% 100%, rgba(0, 102, 255, 0.07) 0px, transparent 50%);
-  background-attachment: fixed;
-  transition: background-color 0.4s ease, color 0.4s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-::selection { background: var(--accent-color); color: var(--on-accent); }
+h1, h2, h3, h4, p { margin: 0; }
+img { max-width: 100%; display: block; }
+a { color: inherit; }
 
-/* Keyboard users can see where they are */
-:focus-visible {
-  outline: 2px solid var(--accent-color);
-  outline-offset: 3px;
+::selection { background: var(--yellow); color: #0b0b0b; }
+
+:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+
+/* ===== SHARED PIECES USED ON SEVERAL PAGES ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 1rem 1.6rem;
+  font-family: var(--mono);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  background: var(--yellow);
+  color: var(--on-color);
+  border: var(--line) solid var(--ink);
+  box-shadow: var(--shadow);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.btn:hover { transform: translate(3px, 3px); box-shadow: 3px 3px 0 var(--ink); }
+.btn:active { transform: translate(6px, 6px); box-shadow: 0 0 0 var(--ink); }
+.btn.alt { background: var(--paper); color: var(--ink); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: var(--shadow); }
+
+.tag {
+  display: inline-block;
+  padding: 0.3rem 0.8rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: var(--paper);
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  border-radius: 100px;
+}
+
+.section-head {
+  display: flex;
+  align-items: flex-end;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+.section-head .num {
+  font-family: var(--display);
+  font-size: clamp(3rem, 8vw, 6rem);
+  line-height: 0.9;
+  color: transparent;
+  -webkit-text-stroke: 3px var(--ink);
+}
+.section-head h2 {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(3.2rem, 10vw, 8rem);
+  line-height: 0.88;
+  text-transform: uppercase;
+}
+
+/* Things slide up as you scroll (browsers that don't support it just show them) */
+@supports (animation-timeline: view()) {
+  .reveal {
+    animation: rise linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 35%;
+  }
+}
+@keyframes rise {
+  from { opacity: 0; transform: translateY(60px); }
+  to   { opacity: 1; transform: none; }
 }
 
 /* Respect people who turn off animations */
@@ -72,4 +131,5 @@ body {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+  .reveal { animation: none !important; }
 }

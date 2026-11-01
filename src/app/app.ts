@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2, inject } from '@angular/core';
+import { Component, HostListener, OnInit, Renderer2, inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
@@ -13,7 +13,8 @@ export class App implements OnInit {
   private renderer = inject(Renderer2);
   private document = inject(DOCUMENT);
 
-  isLightMode = false;
+  isDark = false;
+  menuOpen = false; // is the phone menu open?
   readonly year = new Date().getFullYear();
 
   ngOnInit() {
@@ -21,26 +22,40 @@ export class App implements OnInit {
     try {
       saved = localStorage.getItem('theme');
     } catch {
-      // Storage can be blocked. Just use the default theme.
+      // Storage can be blocked. Just use the default (light) theme.
     }
-    if (saved === 'light') {
+    if (saved === 'dark') {
       this.setTheme(true);
     }
   }
 
   toggleTheme() {
-    this.setTheme(!this.isLightMode);
+    this.setTheme(!this.isDark);
   }
 
-  private setTheme(light: boolean) {
-    this.isLightMode = light;
-    if (light) {
-      this.renderer.addClass(this.document.body, 'light-mode');
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen;
+  }
+
+  closeMenu() {
+    this.menuOpen = false;
+  }
+
+  // Pressing Esc closes the phone menu
+  @HostListener('document:keydown.escape')
+  onEscape() {
+    this.menuOpen = false;
+  }
+
+  private setTheme(dark: boolean) {
+    this.isDark = dark;
+    if (dark) {
+      this.renderer.addClass(this.document.body, 'dark-mode');
     } else {
-      this.renderer.removeClass(this.document.body, 'light-mode');
+      this.renderer.removeClass(this.document.body, 'dark-mode');
     }
     try {
-      localStorage.setItem('theme', light ? 'light' : 'dark');
+      localStorage.setItem('theme', dark ? 'dark' : 'light');
     } catch {
       // ignore
     }
