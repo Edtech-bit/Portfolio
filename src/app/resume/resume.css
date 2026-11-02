@@ -1,56 +1,205 @@
 /* Makes sure this page uses the new colors */
 :host { display: block; background: var(--bg); color: var(--ink); }
 
-.resume-page { padding: 4rem 5vw 7rem; }
+.resume-page { max-width: 1300px; margin: 0 auto; padding: 2.5rem 5vw 6rem; }
 
-.resume-grid {
+/* ===== TOP BAR ===== */
+.cv-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+.btn.big { padding: 1rem 1.8rem; background: var(--pink); }
+
+/* ===== TWO COLUMNS: LEFT PANEL + MAIN ===== */
+.cv-layout {
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
+  grid-template-columns: 360px 1fr;
   gap: 4rem;
   align-items: start;
 }
 
-.resume-sheet {
-  max-width: 560px;
-  background: #fff;
+/* ===== LEFT PANEL ===== */
+.cv-side {
+  padding: 2.4rem 1.9rem 2.2rem;
+  color: var(--bg);
+  background: var(--ink);
   border: var(--line) solid var(--ink);
-  box-shadow: 12px 12px 0 var(--ink);
-  transform: rotate(-1.5deg);
-  transition: transform 0.3s ease;
+  box-shadow: 10px 10px 0 var(--yellow);
 }
-.resume-sheet:hover { transform: rotate(0deg); }
-.resume-sheet img { width: 100%; height: auto; }
 
-.resume-side { display: flex; flex-direction: column; gap: 2rem; position: sticky; top: calc(var(--nav-h) + 2rem); }
-
-.file-card {
-  padding: 1.4rem 1.6rem;
-  background: var(--green);
-  color: var(--on-color);
-  border: var(--line) solid var(--ink);
-  box-shadow: 6px 6px 0 var(--ink);
-  font-family: var(--mono);
-  font-size: 0.9rem;
-  font-weight: 700;
-  overflow-wrap: anywhere;
+.cv-photo {
+  width: 170px;
+  height: 170px;
+  margin-bottom: 1.5rem;
+  object-fit: cover;
+  object-position: top;
+  background: var(--yellow);
+  border: 5px solid var(--yellow);
+  border-radius: 50%;
 }
-.file-card p + p { margin-top: 0.5rem; }
-.file-card span {
-  display: inline-block;
-  min-width: 5.5rem;
-  opacity: 0.65;
+
+.cv-name {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 2.9rem;
+  line-height: 0.95;
   text-transform: uppercase;
-  font-size: 0.75rem;
-  letter-spacing: 0.06em;
 }
 
-.btn.big { align-self: flex-start; padding: 1.3rem 2.2rem; font-size: 1.1rem; background: var(--pink); }
+.cv-title {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.3rem 0.7rem;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #0b0b0b;
+  background: var(--yellow);
+}
 
-.resume-note { color: var(--muted); }
-.resume-note a { font-weight: 700; color: var(--ink); }
+.side-title {
+  margin: 2.2rem 0 0.9rem;
+  padding-bottom: 0.5rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border-bottom: 2px solid color-mix(in srgb, currentColor 35%, transparent);
+}
 
-@media (max-width: 900px) {
-  .resume-grid { grid-template-columns: 1fr; gap: 3rem; }
-  .resume-side { position: static; }
-  .resume-sheet { max-width: 100%; }
+/* Contact */
+.cv-contact { display: flex; flex-direction: column; gap: 0.7rem; margin: 0; padding: 0; list-style: none; }
+.cv-contact li { display: flex; align-items: center; gap: 0.7rem; font-family: var(--mono); font-size: 0.8rem; font-weight: 700; }
+.cv-contact svg { flex: 0 0 18px; width: 18px; height: 18px; }
+.cv-contact a { color: inherit; text-decoration: none; overflow-wrap: anywhere; border-bottom: 1px solid transparent; }
+.cv-contact a:hover { border-bottom-color: currentColor; }
+
+/* Skills */
+.skill-group + .skill-group { margin-top: 1.1rem; }
+.skill-group h3 {
+  margin: 0 0 0.5rem;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+.chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0; padding: 0; list-style: none; }
+.chips li {
+  padding: 0.2rem 0.65rem;
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  border: 2px solid currentColor;
+  border-radius: 100px;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.chips li:hover { color: #0b0b0b; background: var(--yellow); border-color: var(--yellow); }
+
+/* Soft skills */
+.soft { margin: 0; padding: 0; list-style: none; }
+.soft li { display: flex; align-items: center; gap: 0.7rem; font-size: 0.95rem; font-weight: 500; }
+.soft li + li { margin-top: 0.45rem; }
+.soft li::before { content: ''; flex: 0 0 8px; height: 8px; background: var(--yellow); }
+
+/* Certifications */
+.certs { margin: 0; padding: 0; list-style: none; }
+.certs li { display: flex; justify-content: space-between; gap: 0.8rem; font-size: 0.88rem; line-height: 1.35; }
+.certs li + li { margin-top: 0.6rem; }
+.cert-year { flex-shrink: 0; font-family: var(--mono); font-size: 0.75rem; font-weight: 700; opacity: 0.7; }
+
+.side-link {
+  display: inline-block;
+  margin-top: 1.2rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 2px solid var(--yellow);
+}
+.side-link:hover { color: #0b0b0b; background: var(--yellow); }
+
+/* ===== MAIN COLUMN ===== */
+.cv-main { min-width: 0; }
+.cv-sec + .cv-sec { margin-top: 3.5rem; }
+
+.main-title {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0 0 1.6rem;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  line-height: 1;
+  text-transform: uppercase;
+}
+.main-title::after { content: ''; flex: 1; height: var(--line); background: var(--ink); }
+
+.cv-overview { max-width: 70ch; font-size: 1.12rem; line-height: 1.7; }
+
+/* Rows: name on the left, details on the right */
+.cv-entry {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 0.8rem 2rem;
+  padding: 1.7rem 0;
+  border-top: 2px solid var(--ink);
+}
+.cv-entry:first-child { padding-top: 0; border-top: 0; }
+
+.entry-head h3 {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 1.7rem;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+.entry-head h3::before {
+  content: '';
+  display: inline-block;
+  width: 0.5em;
+  height: 0.5em;
+  margin-right: 0.5rem;
+  background: var(--c);
+  border: 2px solid var(--ink);
+}
+.entry-meta { margin-top: 0.5rem; font-family: var(--mono); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.04em; color: var(--muted); }
+
+.entry-points { margin: 0; padding-left: 1.1rem; font-size: 0.97rem; line-height: 1.55; }
+.entry-points li + li { margin-top: 0.4rem; }
+.entry-points li::marker { color: var(--ink); }
+
+.cv-degree { font-size: 1.05rem; line-height: 1.55; }
+.cv-award { margin-top: 0.9rem; font-weight: 700; }
+.cv-award span {
+  padding: 0.15rem 0.5rem;
+  color: #0b0b0b;
+  background: var(--green);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/* ===== TABLETS AND PHONES ===== */
+@media (max-width: 1000px) {
+  .cv-layout { grid-template-columns: 1fr; gap: 3.5rem; }
+  .cv-side { box-shadow: 8px 8px 0 var(--yellow); }
+}
+
+@media (max-width: 700px) {
+  .resume-page { padding-top: 1.8rem; }
+  .cv-entry { grid-template-columns: 1fr; gap: 0.9rem; }
+  .btn.big { width: 100%; justify-content: center; }
+  .cv-name { font-size: 2.5rem; }
 }

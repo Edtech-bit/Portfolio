@@ -13,8 +13,8 @@
       <span class="row r3">Castillo</span>
     </h1>
 
-    <p class="hero-role">Front-End Developer • UI Engineer</p>
-    <p class="hero-intro">I build clean, responsive web apps and turn ideas into things you can click.</p>
+    <p class="hero-role">Full-Stack Developer • Databases &amp; Internal Systems</p>
+    <p class="hero-intro">I build web apps from the database to the screen, and turn ideas into things you can click.</p>
 
     <div class="hero-actions">
       <a routerLink="/projects" class="btn">See my work →</a>
@@ -57,28 +57,87 @@
     <h2>About<br>me</h2>
   </div>
 
-  <div class="about-grid">
-    <figure class="about-photo reveal">
+  <!-- My story -->
+  <div class="story">
+    <figure class="story-photo reveal">
       <img src="About.jpg" alt="Ed Castillo">
+      <figcaption class="story-badge">Hi, I'm Ed</figcaption>
     </figure>
 
-    <div class="about-copy reveal">
-      <h3 class="about-lead">Full-Stack Dev <span class="amp">&amp;</span> Strategist</h3>
+    <div class="story-copy reveal">
+      <h3 class="story-lead">I build the <span class="mark">behind-the-scenes</span> stuff that keeps work organized.</h3>
+
       <p>
-        I'm a passionate web developer with expertise in building modern, responsive web applications.
-        I love creating clean, efficient code and turning ideas into reality through technology.
+        I'm a developer from Angeles City who enjoys databases, internal systems, and tools that help teams
+        get things done without piles of paper or messy spreadsheets.
+      </p>
+      <p>
+        I've built internal systems for Clark International Airport during my OJT, and I make websites and
+        school projects with Angular, Vue, and Node.js.
+      </p>
+      <p>
+        I'm also getting started with cloud computing (AWS, Azure, and Google Cloud), and I'm excited to see
+        how it can power the kind of systems I build.
       </p>
 
-      <div class="skills">
-        @for (skill of skills; track skill.title) {
-          <article class="skill" [style.--c]="skill.color">
-            <h4>{{ skill.title }}</h4>
-            <p>{{ skill.items }}</p>
-          </article>
+      <ul class="facts">
+        @for (fact of facts; track fact) {
+          <li class="tag">{{ fact }}</li>
         }
-      </div>
+      </ul>
     </div>
   </div>
+
+  <!-- What I do -->
+  <h3 class="sub-head reveal">What I do</h3>
+  <div class="services">
+    @for (s of services; track s.title; let i = $index) {
+      <article class="service reveal" [style.--c]="s.color">
+        <span class="service-num">{{ '0' + (i + 1) }}</span>
+        <h4>{{ s.title }}</h4>
+        <p>{{ s.text }}</p>
+      </article>
+    }
+  </div>
+
+  <!-- Skills -->
+  <h3 class="sub-head reveal">Skills</h3>
+  <div class="skill-groups">
+    @for (g of skillGroups; track g.title) {
+      <article class="skill-group reveal" [style.--c]="g.color">
+        <div class="skill-group-head">
+          <h4>{{ g.title }}</h4>
+          @if (g.level) {
+            <span class="level">{{ g.level }}</span>
+          }
+        </div>
+        <ul>
+          @for (item of g.items; track item) {
+            <li>{{ item }}</li>
+          }
+        </ul>
+      </article>
+    }
+  </div>
+
+  <!-- My journey -->
+  <h3 class="sub-head reveal">My journey</h3>
+  <p class="journey-intro reveal"><strong>{{ journeyCount }}</strong> languages, frameworks, and tools learned so far, and counting.</p>
+  <ol class="journey">
+    @for (j of journey; track j.year) {
+      <li class="stop reveal" [class.now]="j.now" [style.--c]="j.color">
+        <div class="stop-card">
+          <span class="stop-year">{{ j.year }}</span>
+          <h4>{{ j.title }}</h4>
+          <ul>
+            @for (item of j.items; track item) {
+              <li>{{ item }}</li>
+            }
+          </ul>
+        </div>
+      </li>
+    }
+  </ol>
 </section>
 
 <!-- ================= CERTIFICATES ================= -->
